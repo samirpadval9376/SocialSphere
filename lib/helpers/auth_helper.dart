@@ -80,4 +80,18 @@ class Auth {
     await googleSignIn.signOut();
     await firebaseAuth.signOut();
   }
+
+  Future<void> updatePassword(
+      {required String emails,
+      required String passwords,
+      required String newPassword}) async {
+    AuthCredential authCredential =
+        EmailAuthProvider.credential(email: emails, password: passwords);
+
+    await firebaseAuth.currentUser!
+        .reauthenticateWithCredential(authCredential)
+        .then((value) {
+      firebaseAuth.currentUser!.updatePassword(newPassword);
+    });
+  }
 }

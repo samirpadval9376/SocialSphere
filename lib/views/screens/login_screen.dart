@@ -22,19 +22,10 @@ class _LoginScreenState extends State<LoginScreen> {
 
   FocusNode passwordFocusNode = FocusNode();
 
-  @override
-  void dispose() {
-    super.dispose();
-
-    emailController.dispose();
-    emailFocusNode.dispose();
-    passwordController.dispose();
-    passwordFocusNode.dispose();
-  }
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    GlobalKey<FormState> formKey = GlobalKey<FormState>();
     Size s = MediaQuery.of(context).size;
 
     return Scaffold(
@@ -80,7 +71,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       controller: passwordController,
                       focusNode: passwordFocusNode,
                       keyBoardType: TextInputType.emailAddress,
-                      obscureText: false,
+                      obscureText: true,
                       hint: "Password",
                       onValidator: (val) {
                         if (val!.isEmpty) {

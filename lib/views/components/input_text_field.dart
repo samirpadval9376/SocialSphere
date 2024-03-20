@@ -34,7 +34,6 @@ class InputTextField extends StatelessWidget {
       decoration: InputDecoration(
         border: OutlineInputBorder(
           borderSide: const BorderSide(
-            width: 1,
             color: AppColor.textFieldFocusBorderColor,
           ),
           borderRadius: BorderRadius.circular(8),

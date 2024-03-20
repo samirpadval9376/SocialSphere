@@ -37,16 +37,16 @@ class AppColor {
   static const MaterialColor primaryMaterialColor = MaterialColor(
     0xff58ee4a,
     <int, Color>{
-      50: Color(0xff58ee4a),
-      100: Color(0xff58ee4a),
-      200: Color(0xff58ee4a),
-      300: Color(0xff58ee4a),
-      400: Color(0xff58ee4a),
-      500: Color(0xff58ee4a),
-      600: Color(0xff58ee4a),
-      700: Color(0xff58ee4a),
-      800: Color(0xff58ee4a),
-      900: Color(0xff58ee4a),
+      50: Color(0xff98ABEE),
+      100: Color(0xff98ABEE),
+      200: Color(0xff98ABEE),
+      300: Color(0xff98ABEE),
+      400: Color(0xff98ABEE),
+      500: Color(0xff98ABEE),
+      600: Color(0xff98ABEE),
+      700: Color(0xff98ABEE),
+      800: Color(0xff98ABEE),
+      900: Color(0xff98ABEE),
     },
   );
 }

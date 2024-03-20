@@ -15,7 +15,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer.periodic(
       const Duration(seconds: 3),
       (timer) {
-        Navigator.of(context).pushReplacementNamed('login_screen');
+        Navigator.of(context).pushReplacementNamed('first_screen');
       },
     );
   }
@@ -44,7 +44,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 child: Text(
                   "Social Media App",
                   style: TextStyle(
-                    fontFamily: AppFonts.sfProDisplayBold,
+                    // fontFamily: AppFonts.sfProDisplayBold,
                     fontSize: 40,
                     color: Colors.white,
                     fontWeight: FontWeight.w700,
