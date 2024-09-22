@@ -53,6 +53,7 @@ dependencies:
   shared_preferences:
   story_maker: ^1.0.5
   permission_handler: any
+  onesignal_flutter: ^5.1.5
 
 dev_dependencies:
   flutter_test:

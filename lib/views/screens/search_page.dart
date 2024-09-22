@@ -273,6 +273,7 @@ class _SearchPageState extends State<SearchPage> {
                                                     followerUsers: [],
                                                     posts: [],
                                                     saved: [],
+                                                    notifications: [],
                                                   );
                                                   await FireStoreHelper
                                                       .fireStoreHelper

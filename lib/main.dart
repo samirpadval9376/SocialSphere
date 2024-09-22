@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:social_media_app/controllers/api_controltter.dart';
@@ -18,6 +19,7 @@ import 'package:social_media_app/views/screens/follower_detail_page.dart';
 import 'package:social_media_app/views/screens/following_detail_page.dart';
 import 'package:social_media_app/views/screens/home_page.dart';
 import 'package:social_media_app/views/screens/login_screen.dart';
+import 'package:social_media_app/views/screens/notification_page.dart';
 import 'package:social_media_app/views/screens/profile_page.dart';
 import 'package:social_media_app/views/screens/save_page.dart';
 import 'package:social_media_app/views/screens/search_page.dart';
@@ -33,6 +35,8 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  OneSignal.initialize("4db4eef8-c5d0-48ae-a14b-051903612f25");
+  OneSignal.Notifications.requestPermission(true);
 
   await ZegoExpressEngine.createEngineWithProfile(
     ZegoEngineProfile(
@@ -151,7 +155,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.black,
       ),
       initialRoute: Auth.auth.firebaseAuth.currentUser == null
-          ? 'splash_screen'
+          ? 'login_screen'
           : 'home_page',
       routes: {
         '/': (context) => const SplashScreen(),
@@ -169,6 +173,7 @@ class MyApp extends StatelessWidget {
         'about_page': (context) => const AboutPage(),
         'save_page': (context) => const SavePage(),
         'add_story': (context) => const AddStory(),
+        'notification_page': (context) => const NotificationPage(),
       },
     );
   }

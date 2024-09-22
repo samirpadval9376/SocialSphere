@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:social_media_app/utils/color_util.dart';
 
 class RoundButton extends StatelessWidget {
@@ -21,11 +22,10 @@ class RoundButton extends StatelessWidget {
     return InkWell(
       onTap: isLoading ? null : onPress,
       child: Container(
-        height: 50,
-        width: double.infinity,
+        padding: const EdgeInsets.symmetric(vertical: 14),
         decoration: BoxDecoration(
           color: color,
-          borderRadius: BorderRadius.circular(50),
+          borderRadius: BorderRadius.circular(15),
         ),
         alignment: Alignment.center,
         child: Center(
@@ -35,10 +35,13 @@ class RoundButton extends StatelessWidget {
                 )
               : Text(
                   title,
-                  style: Theme.of(context).textTheme.displayMedium!.copyWith(
-                        fontSize: 16,
-                        color: textColor,
-                      ),
+                  style: GoogleFonts.poppins(
+                    textStyle: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
                 ),
         ),
       ),

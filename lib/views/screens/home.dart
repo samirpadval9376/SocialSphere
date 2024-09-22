@@ -5,10 +5,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 import 'package:social_media_app/controllers/api_controltter.dart';
 import 'package:social_media_app/controllers/theme_controller.dart';
+import 'package:social_media_app/modals/notification_model.dart';
 import 'package:story_maker/story_maker.dart';
 
 import '../../helpers/auth_helper.dart';
@@ -59,6 +61,15 @@ class _HomeState extends State<Home> {
             ),
           ),
           actions: [
+            IconButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed('notification_page');
+              },
+              icon: const Icon(
+                Icons.favorite_border,
+                color: Colors.white,
+              ),
+            ),
             IconButton(
               onPressed: () {
                 Navigator.of(context).pushNamed('chat_list');
@@ -475,6 +486,34 @@ class _HomeState extends State<Home> {
                                                             .millisecondsSinceEpoch
                                                             .toString(),
                                                       );
+
+                                                      NotificationModel
+                                                          notificationModel =
+                                                          NotificationModel(
+                                                        userModal.username,
+                                                        userModal.image,
+                                                        posts.imageUrl,
+                                                        userModal.email,
+                                                        DateTime.now(),
+                                                      );
+
+                                                      await FireStoreHelper
+                                                          .fireStoreHelper
+                                                          .setNotification(
+                                                        notificationModel:
+                                                            notificationModel,
+                                                        id: posts.email,
+                                                      );
+
+                                                      await FireStoreHelper
+                                                          .fireStoreHelper
+                                                          .updateNotification(
+                                                        postModal: posts,
+                                                        userModal: userModal,
+                                                      );
+
+                                                      OneSignal.login(
+                                                          userModal.email);
                                                     }
                                                   },
                                                   icon: Icon(

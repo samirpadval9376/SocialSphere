@@ -5,6 +5,7 @@ import 'package:social_media_app/modals/chat_modal.dart';
 import 'package:social_media_app/modals/follower_modal.dart';
 import 'package:social_media_app/modals/likes_modal.dart';
 import 'package:social_media_app/modals/message_modal.dart';
+import 'package:social_media_app/modals/notification_model.dart';
 import 'package:social_media_app/modals/post_modal.dart';
 import 'package:social_media_app/modals/user_modal.dart';
 
@@ -26,6 +27,7 @@ class FireStoreHelper {
   String messages = "Messages";
   String saved = "Saved";
   String story = "Story";
+  String notification = "Notification";
 
   Future<void> addUser({required UserModal userModal}) async {
     await fireStore
@@ -440,7 +442,7 @@ class FireStoreHelper {
         await fireStore.collection(collectionPath).doc(email).get();
 
     Map<String, dynamic>? allData = data.data();
-    //
+
     List saved = allData?['saved'] ?? {};
     //
     saved.removeWhere((element) => element['image'] == id);
@@ -452,7 +454,46 @@ class FireStoreHelper {
         .doc(email)
         .update({'saved': saved});
   }
-  // addStory() {
-  //   fireStore.collection(story).doc()
-  // }
+
+  Future<void> setNotification(
+      {required NotificationModel notificationModel,
+      required String id}) async {
+    await fireStore
+        .collection(notification)
+        .doc(id)
+        .set(notificationModel.toMap);
+  }
+
+  Future<void> updateNotification(
+      {required PostModal postModal, required UserModal userModal}) async {
+    String? email = Auth.auth.firebaseAuth.currentUser!.email;
+    DocumentSnapshot<Map<String, dynamic>> data =
+        await fireStore.collection(collectionPath).doc(email).get();
+
+    Map<String, dynamic>? allData = data.data();
+
+    List notifications = allData?['notifications'] ?? {};
+    //
+    notifications.add({
+      'username': userModal.username,
+      'postImage': postModal.imageUrl,
+      'email': userModal.email,
+      'userImage': userModal.image,
+    });
+
+    log(saved.toString());
+
+    await fireStore
+        .collection(collectionPath)
+        .doc(postModal.email)
+        .update({'notifications': notifications});
+  }
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> showNotification() {
+    String? email = Auth.auth.firebaseAuth.currentUser!.email;
+    return fireStore
+        .collection(notification)
+        .where('email', isNotEqualTo: email)
+        .snapshots();
+  }
 }

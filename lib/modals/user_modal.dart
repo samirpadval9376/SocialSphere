@@ -10,6 +10,7 @@ class UserModal {
   List followerUsers;
   List posts;
   List saved;
+  List notifications;
 
   UserModal({
     required this.username,
@@ -23,6 +24,7 @@ class UserModal {
     required this.followerUsers,
     required this.posts,
     required this.saved,
+    required this.notifications,
   });
 
   factory UserModal.fromMap({required Map data}) {
@@ -37,6 +39,7 @@ class UserModal {
       followingUsers: data['followingUsers'],
       followerUsers: data['followerUsers'],
       posts: data['posts'],
+      notifications: data['notifications'],
       createdTime: DateTime.fromMillisecondsSinceEpoch(data['createdTime']),
     );
   }
@@ -54,6 +57,7 @@ class UserModal {
       'createdTime': createdTime.millisecondsSinceEpoch,
       'followingUsers': followingUsers,
       'followerUsers': followerUsers,
+      'notifications': notifications,
     };
   }
 }
